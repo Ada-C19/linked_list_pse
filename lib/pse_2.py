@@ -3,6 +3,9 @@ class Node:
         self.val = value
         self.next = None
 
+# Solution from class
+# Time complexity: O(m+n)--> O(n)
+# Space complexity: O(n) --> due to the set
 def intersection_node(head_a, head_b):
     """
     Given the heads of two singly linked-lists `head_a` and `head_b`, 
@@ -16,8 +19,6 @@ def intersection_node(head_a, head_b):
     Node: the node at which list A and list B intersect, 
     or None if they do not intersect.
     """
-    #[4, 1, 8, 4, 5] -- A
-    #[5, 6, 1, 8, 4, 5] -- B 
 
     # create a set for storing all nodes of the first linked list
     nodes = set()
@@ -35,6 +36,22 @@ def intersection_node(head_a, head_b):
     # if there is no intersection, return None
     return None
 
+# Time complexity: O(m*n) --> worst case scenario m and n are same size --> O(n*n) --> O(n^2)
+# Time complexity: O(1) 
+# Visual shown in class: https://lh4.googleusercontent.com/zDRIcBToS6sC_ZdFN6p5vdel95-kPq736LHU4ldIHQWNtURwNxVC_4iRxbS9RE6q06pb-KWujO7ISc7yiJhLBg1_Bl7tGUxeKrbiwdBJHEFO-QeSPckvJrFSF1ctEtdo6Wpw4Yzy
+def intersection_node(head_a, head_b):
+    while head_b:
+        node_to_search = head_a
+        while node_to_search:
+            if node_to_search == head_b:
+                return head_b
+            node_to_search = node_to_search.next
+        head_b = head_b.next
+    return None
+
+# Solution shown in Learn: spend some time debugging with the debugger or pen/paper to help you see how the pointers work
+# Time complexity: O(A + B) where A is the size of list A and B is the size of list B. The loop will traverse through the lists at most twice.
+# Space complexity: O(1) as the added space needed does not scale with the input data (two additional pointers)
 def intersection_node(head_a, head_b):
     # assign l1 and l2 to point to the heads of list A and list B
     l1, l2 = head_a, head_b
